@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17324d">
+
+
+<title>TOIL Tracker</title>
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e7ebf2;
+  --navy:#17324d;--blue:#2f6bff;--green:#16835f;--green-bg:#e9f7f0;
+  --orange:#c56b00;--orange-bg:#fff3df;--red:#c33f50;--red-bg:#fdecef;
+  --grey-bg:#f1f3f6;--shadow:0 8px 28px rgba(24,39,75,.08);--r:22px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{padding-bottom:96px}
+.app{max-width:720px;margin:0 auto}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(245,247,251,.94);backdrop-filter:blur(16px);padding:16px 16px 8px}
+.brand{display:flex;align-items:center;justify-content:space-between}
+.brand h1{font-size:24px;margin:0;font-weight:800;letter-spacing:-.4px}
+.pill{font-size:12px;font-weight:700;padding:7px 10px;border-radius:999px;background:#e9eef7;color:#42526a}
+main{padding:8px 16px 24px}
+.screen{display:none}.screen.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px;margin:12px 0}
+.hero{padding:22px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
+.big{font-size:42px;line-height:1;font-weight:850;margin:8px 0 4px;letter-spacing:-1.2px}
+.sub{color:var(--muted);font-size:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.metric{padding:16px;border-radius:18px;border:1px solid var(--line);background:#fff}
+.metric .v{font-size:24px;font-weight:800;margin-top:5px}
+.metric.green{background:var(--green-bg)}.metric.orange{background:var(--orange-bg)}
+.section-title{font-size:17px;font-weight:800;margin:22px 4px 8px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{appearance:none;border:0;border-radius:17px;padding:15px 16px;font-size:16px;font-weight:800;cursor:pointer;min-height:52px}
+.btn.primary{background:var(--blue);color:#fff}.btn.secondary{background:#eaf0ff;color:#204fc8}
+.btn.green{background:var(--green);color:#fff}.btn.red{background:var(--red);color:#fff}
+.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--text)}
+.btn.small{padding:9px 11px;min-height:0;font-size:13px;border-radius:12px}
+form{display:grid;gap:12px}
+label{font-size:13px;color:var(--muted);font-weight:700}
+input,select,textarea{width:100%;border:1px solid #dfe4ec;border-radius:15px;background:#fff;padding:14px 14px;font-size:16px;color:var(--text);outline:none}
+input:focus,select:focus,textarea:focus{border-color:#8aa8ff;box-shadow:0 0 0 3px #eaf0ff}
+textarea{min-height:82px;resize:vertical}
+.duration{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:999px;font-weight:750;font-size:13px;cursor:pointer}
+.list{display:grid;gap:10px}
+.item{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 14px;display:grid;grid-template-columns:1fr auto;gap:10px}
+.item-title{font-weight:800}.item-meta{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.4}
+.amount{font-size:16px;font-weight:850;text-align:right;white-space:nowrap}
+.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:850;margin-top:6px}
+.badge.green{background:var(--green-bg);color:var(--green)}.badge.orange{background:var(--orange-bg);color:var(--orange)}
+.badge.red{background:var(--red-bg);color:var(--red)}.badge.grey{background:var(--grey-bg);color:#667085}
+.expiry{border-left:6px solid transparent}.expiry.green{border-left-color:var(--green)}.expiry.orange{border-left-color:var(--orange)}.expiry.red{border-left-color:var(--red)}.expiry.grey{border-left-color:#b4bbc5}
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 8px max(8px,env(safe-area-inset-bottom))}
+.navinner{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.navbtn{border:0;background:transparent;padding:7px 2px 5px;border-radius:12px;color:#7a8494;font-size:10px;font-weight:800}
+.navbtn span{display:block;font-size:21px;line-height:1.1;margin-bottom:2px}
+.navbtn.active{background:#eef3ff;color:#265bdd}
+.empty{text-align:center;color:var(--muted);padding:24px 10px}
+.notice{font-size:13px;background:#eef3ff;color:#34508a;border-radius:15px;padding:12px 14px;line-height:1.45}
+.row-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+@media(max-width:390px){.big{font-size:38px}.quick{grid-template-columns:1fr}.grid2{gap:8px}.metric{padding:14px}.metric .v{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar"><div class="brand"><h1>TOIL Tracker</h1><div class="pill">Offline</div></div></header>
+  <main>
+    <section id="home" class="screen active">
+      <div class="card hero"><div class="eyebrow">Available now</div><div class="big" id="availableNow">—</div><div class="sub">Earned minus approved TOIL</div></div>
+      <div class="grid2">
+        <div class="metric orange"><div class="eyebrow">After pending</div><div class="v" id="afterPending">—</div></div>
+        <div class="metric green"><div class="eyebrow">Total earned</div><div class="v" id="earnedTotal">—</div></div>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="metric"><div class="eyebrow">Approved used</div><div class="v" id="approvedTotal">—</div></div>
+        <div class="metric"><div class="eyebrow">Pending</div><div class="v" id="pendingTotal">—</div></div>
+      </div>
+      <div class="section-title">Quick add</div>
+      <div class="quick">
+        <button class="btn green" onclick="showScreen('earn')">＋ Worked extra time</button>
+        <button class="btn primary" onclick="showScreen('take')">＋ Use / request TOIL</button>
+      </div>
+      <div class="section-title">Next to expire</div><div id="nextExpiry"></div>
+      <div class="notice">Expiry uses your oldest earned TOIL first. Pending requests reduce “After pending” but are not treated as used until approved.</div>
+    </section>
+
+    <section id="earn" class="screen">
+      <div class="card"><div class="section-title" style="margin-top:0">Log extra time worked</div>
+      <form id="earnedForm">
+        <label>Date<input id="earnDate" type="date" required></label>
+        <div><label>Time worked</label><div class="duration">
+          <label>Hours<input id="earnHours" type="number" min="0" max="24" inputmode="numeric"></label>
+          <label>Minutes<input id="earnMinutes" type="number" min="0" max="59" inputmode="numeric"></label>
+        </div></div>
+        <div class="chips"><button type="button" class="chip" onclick="setDuration('earn',60)">1 hour</button><button type="button" class="chip" onclick="setDuration('earn',30)">30 min</button><button type="button" class="chip" onclick="setDuration('earn',450)">7h 30m</button></div>
+        <label>What was it for? <span style="font-weight:400">(optional)</span><textarea id="earnNote" placeholder="e.g. QFTs"></textarea></label>
+        <button class="btn green" type="submit">Save earned time</button>
+      </form></div>
+    </section>
+
+    <section id="take" class="screen">
+      <div class="card"><div class="section-title" style="margin-top:0">Log TOIL request / use</div>
+      <form id="takenForm">
+        <label>Date<input id="takeDate" type="date" required></label>
+        <div><label>TOIL time</label><div class="duration">
+          <label>Hours<input id="takeHours" type="number" min="0" max="24" inputmode="numeric"></label>
+          <label>Minutes<input id="takeMinutes" type="number" min="0" max="59" inputmode="numeric"></label>
+        </div></div>
+        <div class="chips"><button type="button" class="chip" onclick="setDuration('take',450)">Full day · 7h 30m</button><button type="button" class="chip" onclick="setDuration('take',225)">Half day · 3h 45m</button><button type="button" class="chip" onclick="setDuration('take',60)">1 hour</button></div>
+        <label>Status<select id="takeStatus"><option>Requested</option><option>Approved</option><option>Rejected</option><option>Cancelled</option></select></label>
+        <label>Note <span style="font-weight:400">(optional)</span><textarea id="takeNote" placeholder="e.g. Christmas Eve"></textarea></label>
+        <button class="btn primary" type="submit">Save TOIL entry</button>
+      </form></div>
+    </section>
+
+    <section id="expiry" class="screen">
+      <div class="card"><div class="section-title" style="margin-top:0">3‑month expiry</div>
+      <div class="sub">Green = 31+ days · Orange = 15–30 days · Red = 14 days or less.</div></div>
+      <div id="expiryList" class="list"></div>
+    </section>
+
+    <section id="more" class="screen">
+      <div class="card"><div class="section-title" style="margin-top:0">History</div><div id="historyList" class="list"></div></div>
+
+      <div class="card"><div class="section-title" style="margin-top:0">Overtime</div>
+      <form id="overtimeForm">
+        <label>Date<input id="otDate" type="date" required></label>
+        <div class="duration"><label>Hours<input id="otHours" type="number" min="0" max="24" inputmode="numeric"></label><label>Minutes<input id="otMinutes" type="number" min="0" max="59" inputmode="numeric"></label></div>
+        <label>Type<select id="otType"><option>Paid overtime</option><option>Saturday enhancement</option><option>Other</option></select></label>
+        <label>Status<select id="otStatus"><option>To submit</option><option>Submitted</option><option>Approved</option><option>Paid</option><option>Logged</option></select></label>
+        <label>Note<textarea id="otNote" placeholder="Optional"></textarea></label>
+        <button class="btn secondary" type="submit">Save overtime</button>
+      </form>
+      <hr><div id="overtimeList" class="list"></div></div>
+
+      <div class="card"><div class="section-title" style="margin-top:0">Backup</div>
+        <div class="notice">Your data lives only in this browser/device. Export a backup occasionally.</div>
+        <div class="quick" style="margin-top:12px"><button id="backupBtn" class="btn ghost">Export backup</button><label class="btn ghost" style="text-align:center">Restore backup<input id="restoreFile" type="file" accept=".json,application/json" style="display:none"></label></div>
+        <button id="resetBtn" class="btn ghost" style="width:100%;margin-top:12px">Reset to original data</button>
+      </div>
+    </section>
+  </main>
+</div>
+<nav class="bottomnav"><div class="navinner">
+  <button class="navbtn active" data-screen="home"><span>⌂</span>Home</button>
+  <button class="navbtn" data-screen="earn"><span>＋</span>Earn</button>
+  <button class="navbtn" data-screen="take"><span>−</span>Use</button>
+  <button class="navbtn" data-screen="expiry"><span>◷</span>Expiry</button>
+  <button class="navbtn" data-screen="more"><span>☰</span>More</button>
+</div></nav>
+<script>
+const DEFAULT_DATA = {"version": 1, "settings": {"fullDayMinutes": 450, "expiryMonths": 3}, "earned": [{"id": "e1", "date": "2026-05-07", "minutes": 60, "note": "Helping ML w/ E and Flow E2E testing"}, {"id": "e2", "date": "2026-05-08", "minutes": 60, "note": "QFTs"}, {"id": "e3", "date": "2026-05-12", "minutes": 60, "note": "QFTs"}, {"id": "e4", "date": "2026-05-16", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e5", "date": "2026-05-19", "minutes": 60, "note": "QFTs"}, {"id": "e6", "date": "2026-06-02", "minutes": 60, "note": "QFTs"}, {"id": "e7", "date": "2026-06-03", "minutes": 60, "note": "QFTs"}, {"id": "e8", "date": "2026-06-06", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e9", "date": "2026-06-08", "minutes": 60, "note": "QFTs"}, {"id": "e10", "date": "2026-06-09", "minutes": 60, "note": "QFTs"}, {"id": "e11", "date": "2026-06-10", "minutes": 60, "note": "QFTs"}, {"id": "e12", "date": "2026-06-11", "minutes": 60, "note": "Helping ML w/ Flow E2E evidence"}, {"id": "e13", "date": "2026-06-16", "minutes": 60, "note": "QFTs"}, {"id": "e14", "date": "2026-06-18", "minutes": 60, "note": "QFTs"}, {"id": "e15", "date": "2026-07-07", "minutes": 60, "note": "QFTs"}, {"id": "e16", "date": "2026-07-08", "minutes": 60, "note": "QFTs"}, {"id": "e17", "date": "2026-07-11", "minutes": 240, "note": "Saturday work – QFTs / time in lieu"}, {"id": "e18", "date": "2026-07-17", "minutes": 60, "note": "QFTs"}, {"id": "e19", "date": "2026-08-25", "minutes": 60, "note": "QFTs"}, {"id": "e20", "date": "2026-08-27", "minutes": 60, "note": "QFTs"}, {"id": "e21", "date": "2026-09-08", "minutes": 60, "note": "QFTs"}], "taken": [{"id": "t1", "date": "2026-07-21", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t2", "date": "2026-07-22", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t3", "date": "2026-08-18", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t4", "date": "2026-09-02", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t5", "date": "2026-09-07", "minutes": 270, "status": "Approved", "note": "Phased return day"}, {"id": "t6", "date": "2026-12-24", "minutes": 450, "status": "Requested", "note": "Christmas Eve – full TOIL day"}], "overtime": [{"id": "o1", "date": "2026-05-16", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o2", "date": "2026-06-06", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o3", "date": "2026-06-12", "minutes": 30, "type": "Paid overtime", "status": "Logged", "note": "AS overtime"}, {"id": "o4", "date": "2026-07-11", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional – QFTs"}]};
+const KEY = 'toil_tracker_v1';
+
+function clone(x){ return JSON.parse(JSON.stringify(x)); }
+function loadData(){
+  const raw = localStorage.getItem(KEY);
+  if(!raw){ localStorage.setItem(KEY, JSON.stringify(DEFAULT_DATA)); return clone(DEFAULT_DATA); }
+  try{ return JSON.parse(raw); }catch(e){ return clone(DEFAULT_DATA); }
+}
+let data = loadData();
+function save(){ localStorage.setItem(KEY, JSON.stringify(data)); renderAll(); }
+
+function uid(prefix){ return prefix + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function pad(n){ return String(n).padStart(2,'0'); }
+function todayISO(){ const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function fmtDate(s){ if(!s) return ''; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}); }
+function fmtMinutes(m){
+  m=Math.round(Number(m)||0); const h=Math.floor(m/60), min=m%60;
+  if(h && min) return `${h}h ${pad(min)}m`; if(h) return `${h}h`; return `${min}m`;
+}
+function toMinutes(h,m){ return Math.max(0, (parseInt(h||0)*60)+(parseInt(m||0))); }
+function addMonthsISO(dateStr, months){
+  const [y,mo,d]=dateStr.split('-').map(Number);
+  const target = new Date(y, mo-1+months, 1, 12);
+  const last = new Date(target.getFullYear(), target.getMonth()+1, 0, 12).getDate();
+  target.setDate(Math.min(d,last));
+  return `${target.getFullYear()}-${pad(target.getMonth()+1)}-${pad(target.getDate())}`;
+}
+function daysBetween(aISO,bISO){
+  const a=new Date(aISO+'T12:00:00'), b=new Date(bISO+'T12:00:00');
+  return Math.ceil((a-b)/86400000);
+}
+function approvedUsed(){ return data.taken.filter(x=>x.status==='Approved').reduce((s,x)=>s+x.minutes,0); }
+function pendingUsed(){ return data.taken.filter(x=>x.status==='Requested').reduce((s,x)=>s+x.minutes,0); }
+function totalEarned(){ return data.earned.reduce((s,x)=>s+x.minutes,0); }
+function availableNow(){ return totalEarned()-approvedUsed(); }
+function afterPending(){ return availableNow()-pendingUsed(); }
+
+function expiryRows(){
+  const rows=[...data.earned].sort((a,b)=>a.date.localeCompare(b.date));
+  let used=approvedUsed();
+  const today=todayISO();
+  return rows.map(e=>{
+    const consumed=Math.min(e.minutes, Math.max(0, used));
+    used-=consumed;
+    const remaining=e.minutes-consumed;
+    const useBy=addMonthsISO(e.date,data.settings.expiryMonths||3);
+    let days=remaining?daysBetween(useBy,today):null;
+    let status='Used', cls='grey';
+    if(remaining){
+      if(days<0){status='Expired';cls='red';}
+      else if(days<=14){status='Use now';cls='red';}
+      else if(days<=30){status='Use soon';cls='orange';}
+      else{status='Plenty of time';cls='green';}
+    }
+    return {...e,remaining,useBy,days,status,cls};
+  });
+}
+
+function renderHome(){
+  document.getElementById('availableNow').textContent=fmtMinutes(availableNow());
+  document.getElementById('afterPending').textContent=fmtMinutes(afterPending());
+  document.getElementById('earnedTotal').textContent=fmtMinutes(totalEarned());
+  document.getElementById('approvedTotal').textContent=fmtMinutes(approvedUsed());
+  document.getElementById('pendingTotal').textContent=fmtMinutes(pendingUsed());
+
+  const live=expiryRows().filter(x=>x.remaining>0).sort((a,b)=>a.useBy.localeCompare(b.useBy));
+  const n=document.getElementById('nextExpiry');
+  if(live.length){
+    const x=live[0];
+    n.innerHTML=`<div class="item expiry ${x.cls}"><div><div class="item-title">${fmtMinutes(x.remaining)} from ${fmtDate(x.date)}</div><div class="item-meta">Use by ${fmtDate(x.useBy)}${x.days!==null?` · ${x.days} days left`:''}</div><span class="badge ${x.cls}">${x.status}</span></div><div class="amount">${fmtMinutes(x.remaining)}</div></div>`;
+  } else n.innerHTML='<div class="empty">No unused earned TOIL.</div>';
+}
+
+function renderExpiry(){
+  const rows=expiryRows();
+  const el=document.getElementById('expiryList');
+  el.innerHTML=rows.length?rows.map(x=>`
+    <div class="item expiry ${x.cls}">
+      <div>
+        <div class="item-title">Earned ${fmtDate(x.date)}</div>
+        <div class="item-meta">Use by ${fmtDate(x.useBy)} · earned ${fmtMinutes(x.minutes)}</div>
+        <span class="badge ${x.cls}">${x.status}</span>
+      </div>
+      <div class="amount">${fmtMinutes(x.remaining)} left</div>
+    </div>`).join(''):'<div class="empty">No earned TOIL yet.</div>';
+}
+
+function statusClass(s){
+  if(s==='Approved')return 'green'; if(s==='Requested')return 'orange'; if(s==='Rejected'||s==='Cancelled')return 'grey'; return 'grey';
+}
+function renderHistory(){
+  const all=[
+    ...data.earned.map(x=>({kind:'Earned',...x})),
+    ...data.taken.map(x=>({kind:'TOIL',...x}))
+  ].sort((a,b)=>b.date.localeCompare(a.date));
+  document.getElementById('historyList').innerHTML=all.length?all.map(x=>`
+    <div class="item">
+      <div>
+        <div class="item-title">${x.kind==='Earned'?'Earned':'TOIL'} · ${fmtDate(x.date)}</div>
+        <div class="item-meta">${x.note||''}</div>
+        ${x.kind==='TOIL'?`<span class="badge ${statusClass(x.status)}">${x.status}</span>`:''}
+      </div>
+      <div>
+        <div class="amount">${x.kind==='Earned'?'+':'−'}${fmtMinutes(x.minutes)}</div>
+        <div class="row-actions"><button class="btn small ghost" onclick="deleteEntry('${x.kind}','${x.id}')">Delete</button></div>
+      </div>
+    </div>`).join(''):'<div class="empty">No history yet.</div>';
+}
+
+function renderOvertime(){
+  const el=document.getElementById('overtimeList');
+  const rows=[...data.overtime].sort((a,b)=>b.date.localeCompare(a.date));
+  el.innerHTML=rows.length?rows.map(x=>`
+    <div class="item"><div><div class="item-title">${x.type} · ${fmtDate(x.date)}</div>
+    <div class="item-meta">${x.status}${x.note?' · '+x.note:''}</div></div>
+    <div><div class="amount">${fmtMinutes(x.minutes)}</div>
+    <div class="row-actions"><button class="btn small ghost" onclick="deleteOvertime('${x.id}')">Delete</button></div></div></div>`).join(''):'<div class="empty">No overtime logged.</div>';
+}
+
+function renderAll(){ renderHome(); renderExpiry(); renderHistory(); renderOvertime(); }
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.screen===id));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+window.showScreen=showScreen;
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.screen)));
+
+function setDuration(prefix,mins){
+  document.getElementById(prefix+'Hours').value=Math.floor(mins/60);
+  document.getElementById(prefix+'Minutes').value=mins%60;
+}
+window.setDuration=setDuration;
+
+document.getElementById('earnedForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const minutes=toMinutes(earnHours.value,earnMinutes.value);
+  if(!minutes) return alert('Enter some time.');
+  data.earned.push({id:uid('e'),date:earnDate.value,minutes,note:earnNote.value.trim()});
+  save(); e.target.reset(); earnDate.value=todayISO(); setDuration('earn',60); showScreen('home');
+});
+document.getElementById('takenForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const minutes=toMinutes(takeHours.value,takeMinutes.value);
+  if(!minutes) return alert('Enter some time.');
+  data.taken.push({id:uid('t'),date:takeDate.value,minutes,status:takeStatus.value,note:takeNote.value.trim()});
+  save(); e.target.reset(); takeDate.value=todayISO(); setDuration('take',data.settings.fullDayMinutes||450); takeStatus.value='Requested'; showScreen('home');
+});
+document.getElementById('overtimeForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const minutes=toMinutes(otHours.value,otMinutes.value);
+  if(!minutes)return alert('Enter some time.');
+  data.overtime.push({id:uid('o'),date:otDate.value,minutes,type:otType.value,status:otStatus.value,note:otNote.value.trim()});
+  save();e.target.reset();otDate.value=todayISO();setDuration('ot',60);renderOvertime();
+});
+
+function deleteEntry(kind,id){
+  if(!confirm('Delete this entry?'))return;
+  if(kind==='Earned') data.earned=data.earned.filter(x=>x.id!==id);
+  else data.taken=data.taken.filter(x=>x.id!==id);
+  save();
+}
+function deleteOvertime(id){ if(confirm('Delete this overtime entry?')){data.overtime=data.overtime.filter(x=>x.id!==id);save();} }
+window.deleteEntry=deleteEntry; window.deleteOvertime=deleteOvertime;
+
+document.getElementById('backupBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='toil-backup.json';a.click();URL.revokeObjectURL(a.href);
+});
+document.getElementById('restoreFile').addEventListener('change',async e=>{
+  const f=e.target.files[0]; if(!f)return;
+  try{
+    const obj=JSON.parse(await f.text());
+    if(!obj.earned||!obj.taken) throw new Error();
+    data=obj; save(); alert('Backup restored.');
+  }catch{alert('That backup file could not be read.');}
+  e.target.value='';
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  if(confirm('Reset the app back to the original preloaded data?')){data=clone(DEFAULT_DATA);save();}
+});
+
+['earnDate','takeDate','otDate'].forEach(id=>document.getElementById(id).value=todayISO());
+setDuration('earn',60); setDuration('take',450); setDuration('ot',60);
+renderAll();
+
+if('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+</script>
+</body></html>
