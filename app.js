@@ -39,46 +39,37 @@ function afterPending(){ return availableNow()-pendingUsed(); }
 
 function expiryRows(){
   const rows=[...data.earned].sort((a,b)=>a.date.localeCompare(b.date));
-  let used=approvedUsed();
+  let approved=approvedUsed();
+  let pending=pendingUsed();
   const today=todayISO();
+
   return rows.map(e=>{
-    const consumed=Math.min(e.minutes, Math.max(0, used));
-    used-=consumed;
-    const remaining=e.minutes-consumed;
+    const approvedConsumed=Math.min(e.minutes,Math.max(0,approved));
+    approved-=approvedConsumed;
+    const afterApproved=e.minutes-approvedConsumed;
+
+    const pendingReserved=Math.min(afterApproved,Math.max(0,pending));
+    pending-=pendingReserved;
+
+    const uncommitted=afterApproved-pendingReserved;
     const useBy=addMonthsISO(e.date,data.settings.expiryMonths||3);
-    let days=remaining?daysBetween(useBy,today):null;
+    const days=afterApproved?daysBetween(useBy,today):null;
+
     let status='Used', cls='grey';
-    if(remaining){
+    if(afterApproved>0 && pendingReserved===afterApproved){status='Pending';cls='orange';}
+    else if(afterApproved>0 && pendingReserved>0){status='Part pending';cls='orange';}
+    else if(uncommitted>0){
       if(days<0){status='Expired';cls='red';}
       else if(days<=14){status='Use now';cls='red';}
       else if(days<=30){status='Use soon';cls='orange';}
       else{status='Plenty of time';cls='green';}
     }
-    return {...e,remaining,useBy,days,status,cls};
+    return {...e,remaining:afterApproved,pendingReserved,uncommitted,useBy,days,status,cls};
   });
 }
 
-
-function pendingRequestsSorted(){
-  return data.taken
-    .filter(x=>x.status==='Requested')
-    .sort((a,b)=>a.date.localeCompare(b.date));
-}
-
-function renderPendingHome(){
-  const el=document.getElementById('pendingHomeList');
-  if(!el) return;
-  const rows=pendingRequestsSorted();
-  el.innerHTML = rows.length ? rows.map(x=>`
-    <button class="pending-card" type="button" onclick="editTaken('${x.id}')">
-      <div>
-        <div class="pending-title">${fmtDate(x.date)} · ${fmtMinutes(x.minutes)}</div>
-        <div class="pending-note">${x.note||'Pending TOIL'}</div>
-        <span class="badge orange">Pending</span>
-      </div>
-      <div class="pending-edit">Edit ›</div>
-    </button>
-  `).join('') : '<div class="empty">No pending TOIL requests.</div>';
+function nextExpiryRow(){
+  return expiryRows().find(x=>x.remaining>0) || null;
 }
 
 function renderHome(){
@@ -88,28 +79,40 @@ function renderHome(){
   document.getElementById('approvedTotal').textContent=fmtMinutes(approvedUsed());
   document.getElementById('pendingTotal').textContent=fmtMinutes(pendingUsed());
 
-  const live=expiryRows().filter(x=>x.remaining>0).sort((a,b)=>a.useBy.localeCompare(b.useBy));
-  const n=document.getElementById('nextExpiry');
-  if(live.length){
-    const x=live[0];
-    n.innerHTML=`<div class="item expiry ${x.cls}"><div><div class="item-title">${fmtMinutes(x.remaining)} from ${fmtDate(x.date)}</div><div class="item-meta">Use by ${fmtDate(x.useBy)}${x.days!==null?` · ${x.days} days left`:''}</div><span class="badge ${x.cls}">${x.status}</span></div><div class="amount">${fmtMinutes(x.remaining)}</div></div>`;
-  } else n.innerHTML='<div class="empty">No unused earned TOIL.</div>';
-}
+  const x=nextExpiryRow(), n=document.getElementById('nextExpiry');
+  if(!x){n.innerHTML='<div class="empty">No unused earned TOIL.</div>';return;}
 
+  if(x.pendingReserved>0 && x.uncommitted===0){
+    n.innerHTML=`<div class="item expiry orange"><div>
+      <div class="item-title">${fmtMinutes(x.pendingReserved)} from ${fmtDate(x.date)}</div>
+      <div class="item-meta">Use by ${fmtDate(x.useBy)} · covered by a pending TOIL request</div>
+      <span class="badge orange">Pending</span>
+      </div><div class="amount">${fmtMinutes(x.pendingReserved)}</div></div>`;
+  } else if(x.pendingReserved>0){
+    n.innerHTML=`<div class="item expiry orange"><div>
+      <div class="item-title">${fmtMinutes(x.remaining)} from ${fmtDate(x.date)}</div>
+      <div class="item-meta">${fmtMinutes(x.pendingReserved)} pending · ${fmtMinutes(x.uncommitted)} still uncommitted · use by ${fmtDate(x.useBy)}</div>
+      <span class="badge orange">Part pending</span>
+      </div><div class="amount">${fmtMinutes(x.uncommitted)} free</div></div>`;
+  } else {
+    n.innerHTML=`<div class="item expiry ${x.cls}"><div>
+      <div class="item-title">${fmtMinutes(x.uncommitted)} from ${fmtDate(x.date)}</div>
+      <div class="item-meta">Use by ${fmtDate(x.useBy)} · ${x.days} days left</div>
+      <span class="badge ${x.cls}">${x.status}</span>
+      </div><div class="amount">${fmtMinutes(x.uncommitted)}</div></div>`;
+  }
+}
 function renderExpiry(){
-  const rows=expiryRows();
-  const el=document.getElementById('expiryList');
-  el.innerHTML=rows.length?rows.map(x=>`
-    <div class="item expiry ${x.cls}">
-      <div>
-        <div class="item-title">Earned ${fmtDate(x.date)}</div>
-        <div class="item-meta">Use by ${fmtDate(x.useBy)} · earned ${fmtMinutes(x.minutes)}</div>
-        <span class="badge ${x.cls}">${x.status}</span>
-      </div>
-      <div class="amount">${fmtMinutes(x.remaining)} left</div>
-    </div>`).join(''):'<div class="empty">No earned TOIL yet.</div>';
+  const rows=expiryRows(), el=document.getElementById('expiryList');
+  el.innerHTML=rows.length?rows.map(x=>{
+    let detail, amount;
+    if(x.remaining===0){detail=`Used · earned ${fmtMinutes(x.minutes)}`;amount='0m left';}
+    else if(x.pendingReserved>0 && x.uncommitted===0){detail=`${fmtMinutes(x.pendingReserved)} reserved by pending request · use by ${fmtDate(x.useBy)}`;amount=`${fmtMinutes(x.pendingReserved)} pending`;}
+    else if(x.pendingReserved>0){detail=`${fmtMinutes(x.pendingReserved)} pending · ${fmtMinutes(x.uncommitted)} uncommitted · use by ${fmtDate(x.useBy)}`;amount=`${fmtMinutes(x.uncommitted)} free`;}
+    else{detail=`Use by ${fmtDate(x.useBy)} · earned ${fmtMinutes(x.minutes)}`;amount=`${fmtMinutes(x.uncommitted)} free`;}
+    return `<div class="item expiry ${x.cls}"><div><div class="item-title">Earned ${fmtDate(x.date)}</div><div class="item-meta">${detail}</div><span class="badge ${x.cls}">${x.status}</span></div><div class="amount">${amount}</div></div>`;
+  }).join(''):'<div class="empty">No earned TOIL yet.</div>';
 }
-
 function statusClass(s){
   if(s==='Approved')return 'green'; if(s==='Requested')return 'orange'; if(s==='Rejected'||s==='Cancelled')return 'grey'; return 'grey';
 }

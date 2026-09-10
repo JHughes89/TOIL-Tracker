@@ -28,7 +28,7 @@
         <button class="btn primary" onclick="showScreen('take')">＋ Use / request TOIL</button>
       </div>
       <div class="section-title">Pending TOIL</div><div id="pendingHomeList" class="list"></div><div class="section-title">Next to expire</div><div id="nextExpiry"></div>
-      <div class="notice">Expiry uses your oldest earned TOIL first. Pending requests reduce “After pending” but are not treated as used until approved.</div>
+      <div class="notice">Expiry matches your oldest earned TOIL first. Pending requests reserve those hours, so covered time shows as Pending instead of warning you to use it again.</div>
     </section>
 
     <section id="earn" class="screen">
@@ -66,10 +66,10 @@
       <div id="expiryList" class="list"></div>
     </section>
 
-    <section id="more" class="screen">
+    <section id="more" class="screen more-screen">
       <div class="card"><div class="section-title" style="margin-top:0">History</div><div class="history-controls"><select id="historySort" onchange="renderHistory()"><option value="newest" selected>Newest first</option><option value="oldest">Oldest first</option></select><select id="historyTypeFilter" onchange="renderHistory()"><option>All</option><option>Earned</option><option>TOIL</option></select><select id="historyStatusFilter" onchange="renderHistory()"><option>All</option><option>Requested</option><option>Approved</option><option>Rejected</option><option>Cancelled</option></select><input id="historySearch" type="search" placeholder="Search notes or dates…" oninput="renderHistory()"></div><div id="historyList" class="list"></div></div>
 
-      <div class="card"><div class="section-title" style="margin-top:0">Overtime</div>
+      <div class="card more-card overtime-card"><div class="section-title" style="margin-top:0">Overtime</div>
       <form id="overtimeForm">
         <label>Date<input id="otDate" type="date" required></label>
         <div class="duration"><label>Hours<input id="otHours" type="number" min="0" max="24" inputmode="numeric"></label><label>Minutes<input id="otMinutes" type="number" min="0" max="59" inputmode="numeric"></label></div>
@@ -80,7 +80,7 @@
       </form>
       <hr><div id="overtimeList" class="list"></div></div>
 
-      <div class="card"><div class="section-title" style="margin-top:0">Data & updates</div>
+      <div class="card more-card data-card"><div class="section-title" style="margin-top:0">Data & updates</div>
         <div class="notice">Before installing a new build, download your data here. In the new build, use Upload data to restore everything.</div>
         <div class="quick" style="margin-top:12px"><button id="backupBtn" class="btn ghost">Download data</button><label class="btn ghost" style="text-align:center">Upload data<input id="restoreFile" type="file" accept=".json,application/json" style="display:none"></label></div>
         <button id="resetBtn" class="btn ghost" style="width:100%;margin-top:12px">Reset app data</button>

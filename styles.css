@@ -69,3 +69,18 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 .pending-note{font-size:13px;color:var(--muted);margin-top:4px}
 .pending-edit{font-weight:800;color:var(--blue);white-space:nowrap}
 .tap-edit{cursor:pointer}
+
+.history-item{position:relative;overflow:hidden}
+.history-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+.history-earned,.history-approved{background:linear-gradient(90deg,var(--green-bg),#fff 40%)}
+.history-earned::before,.history-approved::before{background:var(--green)}
+.history-requested{background:linear-gradient(90deg,var(--orange-bg),#fff 40%)}
+.history-requested::before{background:var(--orange)}
+.history-rejected{background:linear-gradient(90deg,var(--grey-bg),#fff 40%)}
+.history-rejected::before{background:#9aa3af}
+.history-cancelled{background:linear-gradient(90deg,var(--red-bg),#fff 40%)}
+.history-cancelled::before{background:var(--red)}
+.more-card{border-top:5px solid transparent}
+.history-card{border-top-color:var(--blue);background:linear-gradient(180deg,#f7f9ff,#fff 120px)}
+.overtime-card{border-top-color:#775da6;background:linear-gradient(180deg,#f6f1fb,#fff 120px)}
+.data-card{border-top-color:var(--green);background:linear-gradient(180deg,#effaf5,#fff 120px)}
