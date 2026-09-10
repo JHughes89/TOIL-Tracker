@@ -57,3 +57,5 @@ textarea{min-height:82px;resize:vertical}
 .row-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
 hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 @media(max-width:390px){.big{font-size:38px}.quick{grid-template-columns:1fr}.grid2{gap:8px}.metric{padding:14px}.metric .v{font-size:21px}}
+
+.history-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 14px}.history-controls input{grid-column:1/-1}@media(max-width:420px){.history-controls{grid-template-columns:1fr}.history-controls input{grid-column:auto}}

@@ -1,5 +1,5 @@
 
-const DEFAULT_DATA = {"version": 1, "settings": {"fullDayMinutes": 450, "expiryMonths": 3}, "earned": [{"id": "e1", "date": "2026-05-07", "minutes": 60, "note": "Helping ML w/ E and Flow E2E testing"}, {"id": "e2", "date": "2026-05-08", "minutes": 60, "note": "QFTs"}, {"id": "e3", "date": "2026-05-12", "minutes": 60, "note": "QFTs"}, {"id": "e4", "date": "2026-05-16", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e5", "date": "2026-05-19", "minutes": 60, "note": "QFTs"}, {"id": "e6", "date": "2026-06-02", "minutes": 60, "note": "QFTs"}, {"id": "e7", "date": "2026-06-03", "minutes": 60, "note": "QFTs"}, {"id": "e8", "date": "2026-06-06", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e9", "date": "2026-06-08", "minutes": 60, "note": "QFTs"}, {"id": "e10", "date": "2026-06-09", "minutes": 60, "note": "QFTs"}, {"id": "e11", "date": "2026-06-10", "minutes": 60, "note": "QFTs"}, {"id": "e12", "date": "2026-06-11", "minutes": 60, "note": "Helping ML w/ Flow E2E evidence"}, {"id": "e13", "date": "2026-06-16", "minutes": 60, "note": "QFTs"}, {"id": "e14", "date": "2026-06-18", "minutes": 60, "note": "QFTs"}, {"id": "e15", "date": "2026-07-07", "minutes": 60, "note": "QFTs"}, {"id": "e16", "date": "2026-07-08", "minutes": 60, "note": "QFTs"}, {"id": "e17", "date": "2026-07-11", "minutes": 240, "note": "Saturday work – QFTs / time in lieu"}, {"id": "e18", "date": "2026-07-17", "minutes": 60, "note": "QFTs"}, {"id": "e19", "date": "2026-08-25", "minutes": 60, "note": "QFTs"}, {"id": "e20", "date": "2026-08-27", "minutes": 60, "note": "QFTs"}, {"id": "e21", "date": "2026-09-08", "minutes": 60, "note": "QFTs"}], "taken": [{"id": "t1", "date": "2026-07-21", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t2", "date": "2026-07-22", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t3", "date": "2026-08-18", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t4", "date": "2026-09-02", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t5", "date": "2026-09-07", "minutes": 270, "status": "Approved", "note": "Phased return day"}, {"id": "t6", "date": "2026-12-24", "minutes": 450, "status": "Requested", "note": "Christmas Eve – full TOIL day"}], "overtime": [{"id": "o1", "date": "2026-05-16", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o2", "date": "2026-06-06", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o3", "date": "2026-06-12", "minutes": 30, "type": "Paid overtime", "status": "Logged", "note": "AS overtime"}, {"id": "o4", "date": "2026-07-11", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional – QFTs"}]};
+const DEFAULT_DATA = {"version": 1, "settings": {"fullDayMinutes": 450, "expiryMonths": 3}, "earned": [{"id": "e1", "date": "2026-05-07", "minutes": 60, "note": "Helping ML w/ E and Flow E2E testing"}, {"id": "e2", "date": "2026-05-08", "minutes": 60, "note": "QFTs"}, {"id": "e3", "date": "2026-05-12", "minutes": 60, "note": "QFTs"}, {"id": "e4", "date": "2026-05-16", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e5", "date": "2026-05-19", "minutes": 60, "note": "QFTs"}, {"id": "e6", "date": "2026-06-02", "minutes": 60, "note": "QFTs"}, {"id": "e7", "date": "2026-06-03", "minutes": 60, "note": "QFTs"}, {"id": "e8", "date": "2026-06-06", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e9", "date": "2026-06-08", "minutes": 60, "note": "QFTs"}, {"id": "e10", "date": "2026-06-09", "minutes": 60, "note": "QFTs"}, {"id": "e11", "date": "2026-06-10", "minutes": 60, "note": "QFTs"}, {"id": "e12", "date": "2026-06-11", "minutes": 60, "note": "Helping ML w/ Flow E2E evidence"}, {"id": "e13", "date": "2026-06-16", "minutes": 60, "note": "QFTs"}, {"id": "e14", "date": "2026-06-18", "minutes": 60, "note": "QFTs"}, {"id": "e15", "date": "2026-07-07", "minutes": 60, "note": "QFTs"}, {"id": "e16", "date": "2026-07-08", "minutes": 60, "note": "QFTs"}, {"id": "e17", "date": "2026-07-11", "minutes": 240, "note": "Saturday work – QFTs / time in lieu"}, {"id": "e18", "date": "2026-07-17", "minutes": 60, "note": "QFTs"}, {"id": "e19", "date": "2026-08-25", "minutes": 60, "note": "QFTs"}, {"id": "e20", "date": "2026-08-27", "minutes": 60, "note": "QFTs"}, {"id": "e21", "date": "2026-09-08", "minutes": 60, "note": "QFTs"}], "taken": [{"id": "t1", "date": "2026-07-21", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t2", "date": "2026-07-22", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t3", "date": "2026-08-18", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t4", "date": "2026-09-02", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t5", "date": "2026-09-07", "minutes": 270, "status": "Approved", "note": "Phased return day"}, {"id": "t6", "date": "2026-12-24", "minutes": 450, "status": "Requested", "note": "Day Off from this shithole"}], "overtime": [{"id": "o1", "date": "2026-05-16", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o2", "date": "2026-06-06", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o3", "date": "2026-06-12", "minutes": 30, "type": "Paid overtime", "status": "Logged", "note": "AS overtime"}, {"id": "o4", "date": "2026-07-11", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional – QFTs"}]};
 const KEY = 'toil_tracker_v1';
 
 function clone(x){ return JSON.parse(JSON.stringify(x)); }
@@ -90,24 +90,47 @@ function renderExpiry(){
 function statusClass(s){
   if(s==='Approved')return 'green'; if(s==='Requested')return 'orange'; if(s==='Rejected'||s==='Cancelled')return 'grey'; return 'grey';
 }
-function renderHistory(){
-  const all=[
+function filteredHistory(){
+  let all=[
     ...data.earned.map(x=>({kind:'Earned',...x})),
     ...data.taken.map(x=>({kind:'TOIL',...x}))
-  ].sort((a,b)=>b.date.localeCompare(a.date));
+  ];
+  const kind=document.getElementById('historyTypeFilter')?.value||'All';
+  const status=document.getElementById('historyStatusFilter')?.value||'All';
+  const sort=document.getElementById('historySort')?.value||'newest';
+  const q=(document.getElementById('historySearch')?.value||'').trim().toLowerCase();
+  if(kind!=='All') all=all.filter(x=>x.kind===kind);
+  if(status!=='All') all=all.filter(x=>x.kind==='TOIL'&&x.status===status);
+  if(q) all=all.filter(x=>(x.note||'').toLowerCase().includes(q)||fmtDate(x.date).toLowerCase().includes(q)||x.kind.toLowerCase().includes(q)||(x.status||'').toLowerCase().includes(q));
+  all.sort((a,b)=>sort==='oldest'?a.date.localeCompare(b.date):b.date.localeCompare(a.date));
+  return all;
+}
+function renderHistory(){
+  const all=filteredHistory();
   document.getElementById('historyList').innerHTML=all.length?all.map(x=>`
     <div class="item">
       <div>
         <div class="item-title">${x.kind==='Earned'?'Earned':'TOIL'} · ${fmtDate(x.date)}</div>
         <div class="item-meta">${x.note||''}</div>
-        ${x.kind==='TOIL'?`<span class="badge ${statusClass(x.status)}">${x.status}</span>`:''}
+        ${x.kind==='TOIL'?`<div style="margin-top:9px"><label style="display:block;margin-bottom:5px">Status</label><select onchange="updateTakenStatus('${x.id}', this.value)" style="padding:10px 12px;border-radius:12px">${['Requested','Approved','Rejected','Cancelled'].map(s=>`<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`:''}
       </div>
-      <div>
-        <div class="amount">${x.kind==='Earned'?'+':'−'}${fmtMinutes(x.minutes)}</div>
-        <div class="row-actions"><button class="btn small ghost" onclick="deleteEntry('${x.kind}','${x.id}')">Delete</button></div>
-      </div>
-    </div>`).join(''):'<div class="empty">No history yet.</div>';
+      <div><div class="amount">${x.kind==='Earned'?'+':'−'}${fmtMinutes(x.minutes)}</div><div class="row-actions">${x.kind==='TOIL'?`<button class="btn small ghost" onclick="editTaken('${x.id}')">Edit</button>`:''}<button class="btn small ghost" onclick="deleteEntry('${x.kind}','${x.id}')">Delete</button></div></div>
+    </div>`).join(''):'<div class="empty">No entries match those filters.</div>';
 }
+function updateTakenStatus(id,status){const item=data.taken.find(x=>x.id===id);if(!item)return;item.status=status;save();}
+window.updateTakenStatus=updateTakenStatus;
+let editingTakenId=null;
+function editTaken(id){
+  const item=data.taken.find(x=>x.id===id);if(!item)return;
+  editingTakenId=id;takeDate.value=item.date;setDuration('take',item.minutes);takeStatus.value=item.status;takeNote.value=item.note||'';
+  document.getElementById('takeFormTitle').textContent='Edit TOIL entry';document.getElementById('takeSubmitBtn').textContent='Save changes';document.getElementById('cancelTakenEdit').style.display='block';showScreen('take');
+}
+window.editTaken=editTaken;
+function cancelTakenEdit(){
+  editingTakenId=null;takenForm.reset();takeDate.value=todayISO();setDuration('take',data.settings.fullDayMinutes||450);takeStatus.value='Requested';
+  document.getElementById('takeFormTitle').textContent='Log TOIL request / use';document.getElementById('takeSubmitBtn').textContent='Save TOIL entry';document.getElementById('cancelTakenEdit').style.display='none';
+}
+window.cancelTakenEdit=cancelTakenEdit;
 
 function renderOvertime(){
   const el=document.getElementById('overtimeList');
@@ -147,8 +170,13 @@ document.getElementById('takenForm').addEventListener('submit',e=>{
   e.preventDefault();
   const minutes=toMinutes(takeHours.value,takeMinutes.value);
   if(!minutes) return alert('Enter some time.');
-  data.taken.push({id:uid('t'),date:takeDate.value,minutes,status:takeStatus.value,note:takeNote.value.trim()});
-  save(); e.target.reset(); takeDate.value=todayISO(); setDuration('take',data.settings.fullDayMinutes||450); takeStatus.value='Requested'; showScreen('home');
+  if(editingTakenId){
+    const item=data.taken.find(x=>x.id===editingTakenId);
+    if(item){item.date=takeDate.value;item.minutes=minutes;item.status=takeStatus.value;item.note=takeNote.value.trim();}
+  } else {
+    data.taken.push({id:uid('t'),date:takeDate.value,minutes,status:takeStatus.value,note:takeNote.value.trim()});
+  }
+  save();cancelTakenEdit();showScreen('home');
 });
 document.getElementById('overtimeForm').addEventListener('submit',e=>{
   e.preventDefault();
@@ -169,13 +197,13 @@ window.deleteEntry=deleteEntry; window.deleteOvertime=deleteOvertime;
 
 document.getElementById('backupBtn').addEventListener('click',()=>{
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='toil-backup.json';a.click();URL.revokeObjectURL(a.href);
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='toil-tracker-data.json';a.click();URL.revokeObjectURL(a.href);
 });
 document.getElementById('restoreFile').addEventListener('change',async e=>{
   const f=e.target.files[0]; if(!f)return;
   try{
     const obj=JSON.parse(await f.text());
-    if(!obj.earned||!obj.taken) throw new Error();
+    if(!Array.isArray(obj.earned)||!Array.isArray(obj.taken)) throw new Error(); if(!Array.isArray(obj.overtime)) obj.overtime=[]; if(!obj.settings) obj.settings={fullDayMinutes:450,expiryMonths:3};
     data=obj; save(); alert('Backup restored.');
   }catch{alert('That backup file could not be read.');}
   e.target.value='';

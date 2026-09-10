@@ -1,23 +1,17 @@
-TOIL Tracker — offline web app
+TOIL Tracker v2
 
-Included
-- Your existing TOIL data preloaded
-- Full day = 7h 30m
-- Available now and after-pending balances
-- 3-month expiry using oldest earned TOIL first
-- Green / orange / red warnings
-- Separate overtime log
-- Backup and restore
-- No account, analytics or external libraries
+Changes:
+- History defaults to newest first
+- Sort newest/oldest, filter by type/status, and search history
+- Change TOIL status directly in History
+- Edit TOIL date, time, status and note
+- More -> Data & updates has Download data / Upload data for future builds
+- 24 Dec note changed to: Day Off from this shithole
+- Full day remains 7h 30m
+- 3-month expiry still uses oldest-earned-first internally so expiry accounting stays correct
 
-Quickest way to try it
-Open TOIL_Tracker_Standalone.html in a browser. It runs as one self-contained file.
-
-For a proper home-screen app
-The folder version is a PWA. Installable PWAs need to be opened from HTTPS (or localhost) once.
-After that, it works offline.
-- iPhone/iPad Safari: Share -> Add to Home Screen
-- Android Chrome: menu -> Add to Home screen / Install app
-
-Important
-Data is stored in that browser/device. Export a backup from More occasionally, and do not clear site/browser data unless you have a backup.
+Updating later:
+1. Old app: More -> Data & updates -> Download data
+2. Open/install the new build
+3. New app: More -> Data & updates -> Upload data
+4. Select the JSON file

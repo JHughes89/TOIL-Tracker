@@ -46,7 +46,7 @@
     </section>
 
     <section id="take" class="screen">
-      <div class="card"><div class="section-title" style="margin-top:0">Log TOIL request / use</div>
+      <div class="card"><div class="section-title" id="takeFormTitle" style="margin-top:0">Log TOIL request / use</div>
       <form id="takenForm">
         <label>Date<input id="takeDate" type="date" required></label>
         <div><label>TOIL time</label><div class="duration">
@@ -55,8 +55,8 @@
         </div></div>
         <div class="chips"><button type="button" class="chip" onclick="setDuration('take',450)">Full day · 7h 30m</button><button type="button" class="chip" onclick="setDuration('take',225)">Half day · 3h 45m</button><button type="button" class="chip" onclick="setDuration('take',60)">1 hour</button></div>
         <label>Status<select id="takeStatus"><option>Requested</option><option>Approved</option><option>Rejected</option><option>Cancelled</option></select></label>
-        <label>Note <span style="font-weight:400">(optional)</span><textarea id="takeNote" placeholder="e.g. Christmas Eve"></textarea></label>
-        <button class="btn primary" type="submit">Save TOIL entry</button>
+        <label>Note <span style="font-weight:400">(optional)</span><textarea id="takeNote" placeholder="e.g. Day off"></textarea></label>
+        <button class="btn primary" id="takeSubmitBtn" type="submit">Save TOIL entry</button><button class="btn ghost" id="cancelTakenEdit" type="button" onclick="cancelTakenEdit()" style="display:none">Cancel edit</button>
       </form></div>
     </section>
 
@@ -67,7 +67,7 @@
     </section>
 
     <section id="more" class="screen">
-      <div class="card"><div class="section-title" style="margin-top:0">History</div><div id="historyList" class="list"></div></div>
+      <div class="card"><div class="section-title" style="margin-top:0">History</div><div class="history-controls"><select id="historySort" onchange="renderHistory()"><option value="newest" selected>Newest first</option><option value="oldest">Oldest first</option></select><select id="historyTypeFilter" onchange="renderHistory()"><option>All</option><option>Earned</option><option>TOIL</option></select><select id="historyStatusFilter" onchange="renderHistory()"><option>All</option><option>Requested</option><option>Approved</option><option>Rejected</option><option>Cancelled</option></select><input id="historySearch" type="search" placeholder="Search notes or dates…" oninput="renderHistory()"></div><div id="historyList" class="list"></div></div>
 
       <div class="card"><div class="section-title" style="margin-top:0">Overtime</div>
       <form id="overtimeForm">
@@ -80,10 +80,10 @@
       </form>
       <hr><div id="overtimeList" class="list"></div></div>
 
-      <div class="card"><div class="section-title" style="margin-top:0">Backup</div>
-        <div class="notice">Your data lives only in this browser/device. Export a backup occasionally.</div>
-        <div class="quick" style="margin-top:12px"><button id="backupBtn" class="btn ghost">Export backup</button><label class="btn ghost" style="text-align:center">Restore backup<input id="restoreFile" type="file" accept=".json,application/json" style="display:none"></label></div>
-        <button id="resetBtn" class="btn ghost" style="width:100%;margin-top:12px">Reset to original data</button>
+      <div class="card"><div class="section-title" style="margin-top:0">Data & updates</div>
+        <div class="notice">Before installing a new build, download your data here. In the new build, use Upload data to restore everything.</div>
+        <div class="quick" style="margin-top:12px"><button id="backupBtn" class="btn ghost">Download data</button><label class="btn ghost" style="text-align:center">Upload data<input id="restoreFile" type="file" accept=".json,application/json" style="display:none"></label></div>
+        <button id="resetBtn" class="btn ghost" style="width:100%;margin-top:12px">Reset app data</button>
       </div>
     </section>
   </main>
