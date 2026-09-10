@@ -59,3 +59,13 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 @media(max-width:390px){.big{font-size:38px}.quick{grid-template-columns:1fr}.grid2{gap:8px}.metric{padding:14px}.metric .v{font-size:21px}}
 
 .history-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 14px}.history-controls input{grid-column:1/-1}@media(max-width:420px){.history-controls{grid-template-columns:1fr}.history-controls input{grid-column:auto}}
+
+.pending-card{
+  width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:14px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  color:var(--text);box-shadow:none;font:inherit;cursor:pointer
+}
+.pending-title{font-weight:800;font-size:16px}
+.pending-note{font-size:13px;color:var(--muted);margin-top:4px}
+.pending-edit{font-weight:800;color:var(--blue);white-space:nowrap}
+.tap-edit{cursor:pointer}

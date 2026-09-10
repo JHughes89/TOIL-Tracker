@@ -1,17 +1,19 @@
-TOIL Tracker v2
+TOIL Tracker v3
 
-Changes:
-- History defaults to newest first
-- Sort newest/oldest, filter by type/status, and search history
-- Change TOIL status directly in History
-- Edit TOIL date, time, status and note
-- More -> Data & updates has Download data / Upload data for future builds
-- 24 Dec note changed to: Day Off from this shithole
-- Full day remains 7h 30m
-- 3-month expiry still uses oldest-earned-first internally so expiry accounting stays correct
+Fixes:
+- Pending TOIL is now listed on the Home screen.
+- Tapping a pending TOIL card opens it for editing.
+- TOIL history entries have an Edit button and can be tapped to edit.
+- Status can be changed to Requested / Approved / Rejected / Cancelled.
+- History defaults to newest first and includes sort/filter/search.
+- Added pending 30m TOIL for 18 Sep 2026.
+- Pending total is therefore 8h and After pending is 2h 30m with the current seeded data.
+- Data & updates includes Download data / Upload data.
+- Service worker cache bumped so the new build actually replaces the old cached build.
 
-Updating later:
-1. Old app: More -> Data & updates -> Download data
-2. Open/install the new build
-3. New app: More -> Data & updates -> Upload data
-4. Select the JSON file
+When updating:
+1. Download data from the old app first.
+2. Replace the GitHub repository files with this build.
+3. Wait for GitHub Pages to redeploy.
+4. In Safari, refresh the site. If the Home Screen app still shows the old version, remove it from Home Screen and add it again after opening the updated site in Safari.
+5. Upload your data backup if needed.

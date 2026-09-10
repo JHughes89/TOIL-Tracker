@@ -1,5 +1,5 @@
 
-const DEFAULT_DATA = {"version": 1, "settings": {"fullDayMinutes": 450, "expiryMonths": 3}, "earned": [{"id": "e1", "date": "2026-05-07", "minutes": 60, "note": "Helping ML w/ E and Flow E2E testing"}, {"id": "e2", "date": "2026-05-08", "minutes": 60, "note": "QFTs"}, {"id": "e3", "date": "2026-05-12", "minutes": 60, "note": "QFTs"}, {"id": "e4", "date": "2026-05-16", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e5", "date": "2026-05-19", "minutes": 60, "note": "QFTs"}, {"id": "e6", "date": "2026-06-02", "minutes": 60, "note": "QFTs"}, {"id": "e7", "date": "2026-06-03", "minutes": 60, "note": "QFTs"}, {"id": "e8", "date": "2026-06-06", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e9", "date": "2026-06-08", "minutes": 60, "note": "QFTs"}, {"id": "e10", "date": "2026-06-09", "minutes": 60, "note": "QFTs"}, {"id": "e11", "date": "2026-06-10", "minutes": 60, "note": "QFTs"}, {"id": "e12", "date": "2026-06-11", "minutes": 60, "note": "Helping ML w/ Flow E2E evidence"}, {"id": "e13", "date": "2026-06-16", "minutes": 60, "note": "QFTs"}, {"id": "e14", "date": "2026-06-18", "minutes": 60, "note": "QFTs"}, {"id": "e15", "date": "2026-07-07", "minutes": 60, "note": "QFTs"}, {"id": "e16", "date": "2026-07-08", "minutes": 60, "note": "QFTs"}, {"id": "e17", "date": "2026-07-11", "minutes": 240, "note": "Saturday work – QFTs / time in lieu"}, {"id": "e18", "date": "2026-07-17", "minutes": 60, "note": "QFTs"}, {"id": "e19", "date": "2026-08-25", "minutes": 60, "note": "QFTs"}, {"id": "e20", "date": "2026-08-27", "minutes": 60, "note": "QFTs"}, {"id": "e21", "date": "2026-09-08", "minutes": 60, "note": "QFTs"}], "taken": [{"id": "t1", "date": "2026-07-21", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t2", "date": "2026-07-22", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t3", "date": "2026-08-18", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t4", "date": "2026-09-02", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t5", "date": "2026-09-07", "minutes": 270, "status": "Approved", "note": "Phased return day"}, {"id": "t6", "date": "2026-12-24", "minutes": 450, "status": "Requested", "note": "Day Off from this shithole"}], "overtime": [{"id": "o1", "date": "2026-05-16", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o2", "date": "2026-06-06", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o3", "date": "2026-06-12", "minutes": 30, "type": "Paid overtime", "status": "Logged", "note": "AS overtime"}, {"id": "o4", "date": "2026-07-11", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional – QFTs"}]};
+const DEFAULT_DATA = {"version": 1, "settings": {"fullDayMinutes": 450, "expiryMonths": 3}, "earned": [{"id": "e1", "date": "2026-05-07", "minutes": 60, "note": "Helping ML w/ E and Flow E2E testing"}, {"id": "e2", "date": "2026-05-08", "minutes": 60, "note": "QFTs"}, {"id": "e3", "date": "2026-05-12", "minutes": 60, "note": "QFTs"}, {"id": "e4", "date": "2026-05-16", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e5", "date": "2026-05-19", "minutes": 60, "note": "QFTs"}, {"id": "e6", "date": "2026-06-02", "minutes": 60, "note": "QFTs"}, {"id": "e7", "date": "2026-06-03", "minutes": 60, "note": "QFTs"}, {"id": "e8", "date": "2026-06-06", "minutes": 240, "note": "Saturday work – time in lieu"}, {"id": "e9", "date": "2026-06-08", "minutes": 60, "note": "QFTs"}, {"id": "e10", "date": "2026-06-09", "minutes": 60, "note": "QFTs"}, {"id": "e11", "date": "2026-06-10", "minutes": 60, "note": "QFTs"}, {"id": "e12", "date": "2026-06-11", "minutes": 60, "note": "Helping ML w/ Flow E2E evidence"}, {"id": "e13", "date": "2026-06-16", "minutes": 60, "note": "QFTs"}, {"id": "e14", "date": "2026-06-18", "minutes": 60, "note": "QFTs"}, {"id": "e15", "date": "2026-07-07", "minutes": 60, "note": "QFTs"}, {"id": "e16", "date": "2026-07-08", "minutes": 60, "note": "QFTs"}, {"id": "e17", "date": "2026-07-11", "minutes": 240, "note": "Saturday work – QFTs / time in lieu"}, {"id": "e18", "date": "2026-07-17", "minutes": 60, "note": "QFTs"}, {"id": "e19", "date": "2026-08-25", "minutes": 60, "note": "QFTs"}, {"id": "e20", "date": "2026-08-27", "minutes": 60, "note": "QFTs"}, {"id": "e21", "date": "2026-09-08", "minutes": 60, "note": "QFTs"}], "taken": [{"id": "t1", "date": "2026-07-21", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t2", "date": "2026-07-22", "minutes": 450, "status": "Approved", "note": "Full TOIL day"}, {"id": "t3", "date": "2026-08-18", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t4", "date": "2026-09-02", "minutes": 450, "status": "Rejected", "note": "Time Owing request"}, {"id": "t5", "date": "2026-09-07", "minutes": 270, "status": "Approved", "note": "Phased return day"}, {"id": "t6", "date": "2026-12-24", "minutes": 450, "status": "Requested", "note": "Day Off from this shithole"},{"id":"t7","date":"2026-09-18","minutes":30,"status":"Requested","note":"Half an hour TOIL"}], "overtime": [{"id": "o1", "date": "2026-05-16", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o2", "date": "2026-06-06", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional"}, {"id": "o3", "date": "2026-06-12", "minutes": 30, "type": "Paid overtime", "status": "Logged", "note": "AS overtime"}, {"id": "o4", "date": "2026-07-11", "minutes": 240, "type": "Saturday enhancement", "status": "To submit", "note": "30% additional – QFTs"}]};
 const KEY = 'toil_tracker_v1';
 
 function clone(x){ return JSON.parse(JSON.stringify(x)); }
@@ -56,6 +56,29 @@ function expiryRows(){
     }
     return {...e,remaining,useBy,days,status,cls};
   });
+}
+
+
+function pendingRequestsSorted(){
+  return data.taken
+    .filter(x=>x.status==='Requested')
+    .sort((a,b)=>a.date.localeCompare(b.date));
+}
+
+function renderPendingHome(){
+  const el=document.getElementById('pendingHomeList');
+  if(!el) return;
+  const rows=pendingRequestsSorted();
+  el.innerHTML = rows.length ? rows.map(x=>`
+    <button class="pending-card" type="button" onclick="editTaken('${x.id}')">
+      <div>
+        <div class="pending-title">${fmtDate(x.date)} · ${fmtMinutes(x.minutes)}</div>
+        <div class="pending-note">${x.note||'Pending TOIL'}</div>
+        <span class="badge orange">Pending</span>
+      </div>
+      <div class="pending-edit">Edit ›</div>
+    </button>
+  `).join('') : '<div class="empty">No pending TOIL requests.</div>';
 }
 
 function renderHome(){
@@ -142,7 +165,7 @@ function renderOvertime(){
     <div class="row-actions"><button class="btn small ghost" onclick="deleteOvertime('${x.id}')">Delete</button></div></div></div>`).join(''):'<div class="empty">No overtime logged.</div>';
 }
 
-function renderAll(){ renderHome(); renderExpiry(); renderHistory(); renderOvertime(); }
+function renderAll(){ renderHome(); renderPendingHome(); renderExpiry(); renderHistory(); renderOvertime(); }
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
